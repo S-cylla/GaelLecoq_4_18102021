@@ -21,6 +21,7 @@ const birthdate = document.getElementById("birthdate"); // Input date de naissan
 const quantity = document.getElementById("quantity"); // Input participations
 const checkbox1 = document.getElementById("checkbox1"); // Checkbox conditions
 const submitButton = document.getElementById("button-submit"); // Bouton submit
+const modalConfirm = document.querySelector(".modal-confirm"); // Confirmation
 
 // Éléments d'erreur
 const errorFirst = document.getElementById("error-first"); // Erreur prénom
@@ -48,6 +49,8 @@ formData[6].addEventListener("change", conditionsValidation); // Validation cond
 // Lancement de la modale
 function launchModal() {
   modalbg.style.display = "block";
+  modalbody.style.display = "block";
+  modalConfirm.style.display = "none";
 }
 
 // Fermeture de la modale
@@ -153,7 +156,8 @@ function formValidation(e) {
 
   if (!isFormValid.includes(false)) {
     errorSubmit.style.display = "none";
-    closeModal()
+    modalbody.style.display = "none";
+    modalConfirm.style.display = "block";
     modalForm.reset()
   } else {
     errorSubmit.style.display = "block";
