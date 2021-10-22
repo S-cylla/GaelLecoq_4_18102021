@@ -1,12 +1,3 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground"); // Fenêtre modale
 const modalBtn = document.querySelectorAll(".modal-btn"); // Bouton d'inscription
@@ -14,6 +5,7 @@ const modalbody = document.querySelector(".modal-body"); // Contenu de la modale
 const modalForm = document.getElementById("modal-form"); // Formulaire
 const closemodal = document.querySelector(".close"); // Croix de fermeture de la fenêtre modale 
 const formData = document.querySelectorAll(".formData"); // Champs du formulaire
+const textControl = document.querySelectorAll(".text-control") // Input du formulaire
 const firstName = document.getElementById("first"); // Input prénom
 const lastName = document.getElementById("last"); // Input nom
 const email = document.getElementById("email"); // Input e-mail
@@ -36,15 +28,23 @@ const errorSubmit = document.getElementById("error-submit"); // Erreur submit
 // Évènements
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // Clic de lancement de la modale
 closemodal.addEventListener("click",  closeModal); // Clic sur la croix de fermeture
-submitButton.addEventListener("click", formValidation); // Clic sur le bouton submit
-
 formData[0].addEventListener("change", firstnameValidation); // Validation Prénom
 formData[1].addEventListener("change", lastnameValidation); // Validation nom
 formData[2].addEventListener("change", emailValidation); // Validation email
 formData[3].addEventListener("change", birthValidation); // Validation date de naissance
 formData[4].addEventListener("change", quantityValidation); // Validation participations
 formData[6].addEventListener("change", conditionsValidation); // Validation conditions d'utilisation
+submitButton.addEventListener("click", formValidation); // Clic sur le bouton submit
 
+// Responsive
+function editNav() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
 
 // Lancement de la modale
 function launchModal() {
@@ -67,7 +67,7 @@ function firstnameValidation() {
   } else {
     errorFirst.style.display = "block"
     errorFirst.innerHTML = "Vous devez entrer au moins 2 caractères" // Message d'erreur
-    firstName.style.border = "2px solid #FF142F"; // La bordure devient rouge
+    firstName.style.border = "2px solid #FE142F"; // La bordure devient rouge
     return false; // Input toujours invalide
   } 
 }
@@ -81,7 +81,7 @@ function lastnameValidation() {
   } else {
     errorLast.style.display = "block"
     errorLast.innerHTML = "Vous devez entrer au moins 2 caractères"
-    lastName.style.border = "2px solid #FF142F";
+    lastName.style.border = "2px solid #FE142F";
     return false;
   } 
 }
@@ -96,7 +96,7 @@ function emailValidation() {
   } else {
     errorEmail.style.display = "block"
     errorEmail.innerHTML = "Adresse e-mail invalide";
-    email.style.border = "2px solid #FF142F";
+    email.style.border = "2px solid #FE142F";
     return false;
   }
 }
@@ -111,21 +111,22 @@ function birthValidation() {
   } else {
     errorBirthdate.style.display = "block"
     errorBirthdate.innerHTML = "Date invalide";
-    birthdate.style.border = "2px solid #FF142F";
+    birthdate.style.border = "2px solid #FE142F";
     return false;
   }
 }
 
 // Validation "Nombre de tournois"
 function quantityValidation() {
-  if (!isNaN(quantity.value)) {
+  const quantityRegex = new RegExp(/^\d{1,}$/);
+  if (quantityRegex.test(quantity.value)) {
     quantity.style.border = "2px solid #279E7A";
     errorQuantity.style.display = "none";
     return true;
   } else {
     errorQuantity.style.display = "block"
     errorQuantity.innerHTML = "Veuillez entrer un nombre";
-    quantity.style.border = "2px solid #FF142F";
+    quantity.style.border = "2px solid #FE142F";
     return false;
   }
 }
@@ -138,7 +139,7 @@ function conditionsValidation() {
   } else {
     errorCheckbox1.style.display = "block";
     errorCheckbox1.innerHTML = "Veuillez accepter les conditions d'utilisation";
-    checkbox1.style.border = "2px solid #FF142F";
+    checkbox1.style.border = "2px solid #FE142F";
     return false
   }
 }
@@ -159,9 +160,14 @@ function formValidation(e) {
     modalbody.style.display = "none";
     modalConfirm.style.display = "block";
     modalForm.reset()
+
+    for (let i = 0; i < textControl.length; i++) {
+      const element = textControl[i];
+      element.style.border = "0.8px solid #CCC";
+    }
+
   } else {
     errorSubmit.style.display = "block";
     errorSubmit.innerHTML = "Veuillez remplir tous les champs";
   }
-}
-
+} 
