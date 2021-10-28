@@ -32,7 +32,7 @@ formData[0].addEventListener("change", firstnameValidation); // Validation Prén
 formData[1].addEventListener("change", lastnameValidation); // Validation nom
 formData[2].addEventListener("change", emailValidation); // Validation email
 formData[3].addEventListener("change", birthValidation); // Validation date de naissance
-formData[4].addEventListener("change", quantityValidation); // Validation participations
+formData[4].addEventListener("input", quantityValidation); // Validation participations
 formData[6].addEventListener("change", conditionsValidation); // Validation conditions d'utilisation
 submitButton.addEventListener("click", formValidation); // Clic sur le bouton submit
 
@@ -118,8 +118,14 @@ function birthValidation() {
 
 // Validation "Nombre de tournois"
 function quantityValidation() {
-  const quantityRegex = new RegExp(/^\d{1,}$/);
+  const quantityRegex = new RegExp(/^-?\d{1,}$/);
   if (quantityRegex.test(quantity.value)) {
+    if (quantity.value > 99 || quantity.value < 0) {
+    errorQuantity.style.display = "block"
+    errorQuantity.innerHTML = "Veuillez entrer un nombre entre 0 et 99";
+    quantity.style.border = "2px solid #FE142F";
+    return false;
+    }
     quantity.style.border = "2px solid #279E7A";
     errorQuantity.style.display = "none";
     return true;

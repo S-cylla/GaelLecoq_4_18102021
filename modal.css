@@ -2,6 +2,7 @@
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
   --modal-duration: 0.8s;
+  --red-color: #FE142F;
 }
 
 @keyframes modalopen {
@@ -78,7 +79,7 @@ li {
 }
 
 .topnav a:hover {
-  background-color: #ff0000;
+  background-color: var(--red-color);
   color: #ffffff;
   border-radius: 15px;
 }
@@ -89,7 +90,7 @@ li {
 
 .error-input {
   font-size: 17px;
-  color: #fe142f;
+  color: var(--red-color);
 }
 
 @media screen and (max-width: 1150px) {
@@ -120,14 +121,23 @@ li {
   .topnav.responsive .main-navbar {
     display: block;
     position: relative;
-  }
+    background-color: #FFF;
+    position: fixed;
+    right: 35px;
+    z-index: 1;
+}
 
   .topnav.responsive ul {
     display: block;
+    border: 2px solid var(--red-color);
+    border-radius: 20px;
   }
 
   .topnav.responsive a {
     float: none;
+  }
+
+  .topnav.responsive .nav-link {
     display: block;
     text-align: left;
     animation: appear;
@@ -150,7 +160,7 @@ main {
 
 .modal-btn {
   font-size: 145%;
-  background: #fe142f;
+  background: var(--red-color);
   display: flex;
   margin: auto;
   padding: 2em;
@@ -173,7 +183,7 @@ main {
 /* Modal form */
 
 .button {
-  background: #fe142f;
+  background: var(--red-color);
   margin-top: 0.5em;
   padding: 1em;
   color: #fff;
@@ -374,7 +384,7 @@ input[data-error]::after {
 
 .btn-submit,
 .btn-signup {
-  background: #fe142f;
+  background: var(--red-color);
   display: block;
   margin: 0 auto;
   border-radius: 7px;
@@ -491,7 +501,6 @@ input[data-error]::after {
 
 .hero-content > * {
   position: relative;
-  z-index: 1;
 }
 
 .hero-headline {
@@ -527,7 +536,7 @@ input[data-error]::after {
 }
 
 .copyrights {
-  color: #fe142f;
+  color: var(--red-color);
   padding: 0;
   font-size: 1rem;
   margin: 30px 0;
@@ -540,6 +549,7 @@ input[data-error]::after {
 
 .modal-confirm {
   display: none;
+  padding: 10px 20px 20px 20px;
 }
 
 footer {
