@@ -14,6 +14,7 @@ const quantity = document.getElementById("quantity"); // Input participations
 const checkbox1 = document.getElementById("checkbox1"); // Checkbox conditions
 const submitButton = document.getElementById("button-submit"); // Bouton submit
 const modalConfirm = document.querySelector(".modal-confirm"); // Confirmation
+const confirmButton = document.getElementById("btn-confirm"); // Bouton "Fermer" de la fenêtre de confirmation
 
 // Éléments d'erreur
 const errorFirst = document.getElementById("error-first"); // Erreur prénom
@@ -35,6 +36,7 @@ formData[3].addEventListener("change", birthValidation); // Validation date de n
 formData[4].addEventListener("input", quantityValidation); // Validation participations
 formData[6].addEventListener("change", conditionsValidation); // Validation conditions d'utilisation
 submitButton.addEventListener("click", formValidation); // Clic sur le bouton submit
+confirmButton.addEventListener("click", closeConfirm); // Fermeture de la fenêtre de confirmation
 
 // Responsive
 function editNav() {
@@ -56,17 +58,25 @@ function launchModal() {
 // Fermeture de la modale
 function closeModal() {
   modalbg.style.display = "none";
+  modalConfirm.style.display = "none"
+}
+
+// Fermeture de la confirmation
+function closeConfirm() {
+  modalbg.style.display = "none";
+  modalConfirm.style.display = "none"
 }
 
 // Validation "Prénom"
 function firstnameValidation() {
-  if (firstName.value.length > 1) { // Si le nombre de caractères est > 1
+  const nameRegex = new RegExp(/^[a-zA-ZáàâäãåæéèêëîïôöòøœûùûüÀÁÂÄÃÅÆÉÈÊËÌÍÎÏÒÓÔÕÖØÙÚÛÜ,.'-]+$/);
+  if (firstName.value.length > 1 && nameRegex.test(firstName.value)) { // Si le nombre de caractères est > 1
     firstName.style.border = "2px solid #279E7A"; // La bordure devient verte
     errorFirst.style.display = "none"
     return true // Input valide
   } else {
     errorFirst.style.display = "block"
-    errorFirst.innerHTML = "Vous devez entrer au moins 2 caractères" // Message d'erreur
+    errorFirst.innerHTML = "Votre prénom doit contenir au moins 2 caractères, sans caractères spéciaux" // Message d'erreur
     firstName.style.border = "2px solid #FE142F"; // La bordure devient rouge
     return false; // Input toujours invalide
   } 
@@ -74,13 +84,14 @@ function firstnameValidation() {
 
 // Validation "Nom"
 function lastnameValidation() {
-  if (lastName.value.length > 1) {
+  const nameRegex = new RegExp(/^[a-zA-ZáàâäãåæéèêëîïôöòøœûùûüÀÁÂÄÃÅÆÉÈÊËÌÍÎÏÒÓÔÕÖØÙÚÛÜ,.'-]+$/);
+  if (lastName.value.length > 1 && nameRegex.test(lastName.value)) {
     lastName.style.border = "2px solid #279E7A";
     errorLast.style.display = "none"
     return true;
   } else {
     errorLast.style.display = "block"
-    errorLast.innerHTML = "Vous devez entrer au moins 2 caractères"
+    errorLast.innerHTML = "Votre nom doit contenir au moins 2 caractères, sans caractères spéciaux"
     lastName.style.border = "2px solid #FE142F";
     return false;
   } 
@@ -164,7 +175,7 @@ function formValidation(e) {
   if (!isFormValid.includes(false)) {
     errorSubmit.style.display = "none";
     modalbody.style.display = "none";
-    modalConfirm.style.display = "block";
+    modalConfirm.style.display = "flex";
     modalForm.reset()
 
     for (let i = 0; i < textControl.length; i++) {
