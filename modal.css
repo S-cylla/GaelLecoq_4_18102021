@@ -498,11 +498,17 @@ input[data-error]::after {
 .modal-confirm {
   position: relative;
   display: none;
+<<<<<<< HEAD
   flex-direction: column;
   height: 850px;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+=======
+  height: 850px;
+  justify-content: center;
+  align-items: center;
+>>>>>>> master
   
 }
 
@@ -512,11 +518,14 @@ input[data-error]::after {
   font-weight: 400;
   font-size: 36px;
   text-align: center;
+<<<<<<< HEAD
 }
 
 .btn-confirm {
   position: absolute;
   bottom: 20px;
+=======
+>>>>>>> master
 }
 
 footer {
@@ -631,8 +640,11 @@ footer {
     font-size: 13px;
     max-width: 75%;
   }
+<<<<<<< HEAD
 
   .modal-confirm {
     height: 600px;
   }
+=======
+>>>>>>> master
 }
