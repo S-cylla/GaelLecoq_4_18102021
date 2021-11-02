@@ -164,7 +164,7 @@ function formValidation(e) {
   if (!isFormValid.includes(false)) {
     errorSubmit.style.display = "none";
     modalbody.style.display = "none";
-    modalConfirm.style.display = "block";
+    modalConfirm.style.display = "flex";
     modalForm.reset()
 
     for (let i = 0; i < textControl.length; i++) {
